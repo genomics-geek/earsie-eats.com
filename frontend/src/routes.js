@@ -6,6 +6,7 @@ import { AuthRoute } from 'common/auth'
 import { AsyncLoader } from 'common/loaders'
 import Home from 'pages/home'
 import Login from 'pages/login'
+import Register from 'pages/registration'
 
 
 const App = Loadable({
@@ -19,6 +20,7 @@ const Routes = () => (
     <Route exact path="/" component={Home} />
     <Route path="/app" render={() => <AuthRoute protectedComponent={<App />} />} />
     <Route exact path="/login/" component={Login} />
+    <Route path="/register/" component={Register} />
   </Switch>
 )
 

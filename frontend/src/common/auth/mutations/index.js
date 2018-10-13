@@ -29,3 +29,29 @@ mutation login($input: LogoutInput!) {
   }
 }
 `
+
+
+export const REGISTER_MUTATION = gql`
+mutation login($input: RegisterInput!) {
+  login(input: $input) @rest(
+    method: "POST",
+    endpoint: "auth",
+    path: "registration/",
+  ) {
+    detail
+  }
+}
+`
+
+
+export const VERIFY_EMAIL_MUTATION = gql`
+mutation login($input: VerifyEmailInput!) {
+  login(input: $input) @rest(
+    method: "POST",
+    endpoint: "auth",
+    path: "registration/verify-email/",
+  ) {
+    detail
+  }
+}
+`

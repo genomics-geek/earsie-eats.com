@@ -27,6 +27,8 @@ urlpatterns = [
     re_path(r'^$', TemplateView.as_view(template_name="index.html")),
     re_path(r'^app/(?P<route>.*)$', login_required(TemplateView.as_view(template_name="index.html")), name='app'),
     re_path(r'^login/', TemplateView.as_view(template_name="index.html"), name="login"),
+    re_path(r'^register/', TemplateView.as_view(template_name="index.html"), name="register"),
+    path("register/verify-email/<str:key>", TemplateView.as_view(template_name="index.html"), name="verify_email"),
 
     path("api/", include(router.urls)),
     path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
