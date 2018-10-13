@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-import { get, replace } from 'lodash'
+import { get, map, mapKeys, replace } from 'lodash'
 
 import { mutations } from 'common/auth'
 
@@ -23,15 +23,24 @@ class Login extends Component {
 
 	onError = error => {
 		const { onChange } = this.props
-		let value
-		if (error.message.includes('status code 400')) {
-			value = 'Incorrect credentials!'
-		} else {
-			value = 'Server error! Please try again. '
-			value += 'If it happens again, please email genomics.geek.04.22@gmail.com'
+		const statusCode = get(error.networkError, 'statusCode')
+		const errors = []
+
+		if (statusCode === 400) {
+			mapKeys(get(error, 'networkError.result', {}), (values, key) => {
+				map(values, value => errors.push(value))
+			})
 		}
 
-		onChange({}, {name: 'error', value})
+		else if (statusCode === 500) {
+			let message = 'Server error! Please try again. '
+			message += 'If it continues to happen, please email genomics-geek.04.22@gmail.com'
+			errors.push(message)
+		}
+
+		else errors.push(error.mesage)
+
+		onChange({}, {name: 'errors', value: errors})
 	}
 
 	render() {

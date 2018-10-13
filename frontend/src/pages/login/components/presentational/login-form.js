@@ -9,13 +9,13 @@ class LoginForm extends React.Component {
 		username: '',
 		password: '',
 		loading: false,
-		error: ''
+		errors: [],
 	}
 
   handleChange = (e, { name, value }) => this.setState({[name]: value})
 
   render() {
-    const { loading, error, username, password } = this.state
+    const { loading, errors, username, password } = this.state
 
     return(
       <Form
@@ -23,6 +23,7 @@ class LoginForm extends React.Component {
           size="large"
           key="big"
           loading={loading}
+					error={errors.length > 0}
         >
           <Form.Input
             id="username"
@@ -44,14 +45,11 @@ class LoginForm extends React.Component {
             type="password"
           />
 
-          {error
-						? (
-						<Message negative>
-               <Message.Header as="h5">Login Failed</Message.Header>
-               <p>{error}</p>
-              </Message>
-						) : ( '' )
-          }
+					<Message
+						error
+						list={errors}
+					/>
+
 					<Login
 						username={username}
 						password={password}
