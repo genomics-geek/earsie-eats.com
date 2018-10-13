@@ -1,48 +1,35 @@
 import React from 'react'
+import { Query } from 'react-apollo'
+import { Loader } from 'semantic-ui-react'
+import { get } from 'lodash'
 
-import { NavLink } from 'react-router-dom'
-import { Icon, Menu } from 'semantic-ui-react'
+import { queries } from 'common/auth'
+import Alert from 'common/alert'
+import Menu from './components/presentational/menu'
 
 import './index.css'
 
 
 export const AppBar = () => (
-  <Menu className="AppBar" pointing secondary stackable>
-    <Menu.Item
-      className="AppBar-item animated rollIn"
-      name="home"
-      as={NavLink}
-      to="/app/home/"
-    >
-      <Icon name="food" color="blue" />
-    </Menu.Item>
-    <Menu.Item
-      className="AppBar-item"
-      name="about"
-      icon="hand peace outline"
-      as={NavLink}
-      to="/app/about/"
-    />
-    <Menu.Item
-      className="AppBar-item"
-      name="blog"
-      icon="comments outline"
-      as={NavLink}
-      to="/app/blog/"
-    />
-    <Menu.Menu position="right">
-      <Menu.Item name="github">
-        <a
-          className="AppBar-link"
-          href="https://github.com/genomics-geek/earsie-eats.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon name="github" link size="large" />
-        </a>
-      </Menu.Item>
-    </Menu.Menu>
-  </Menu>
+  <Query query={queries.CURRENT_USER_QUERY} fetchPolicy="network-only">
+    {({ loading, error, data }) => {
+      if (loading) return <Loader active size="tiny" />
+      if (error) return <Alert type="error" message={`Authentication: ${error.message}`} />
+
+      const currentUser = get(data, 'currentUser')
+
+      let authenticated = false
+      if (currentUser) authenticated = true
+
+      return (
+        <Menu
+          authenticated={authenticated}
+          username={get(currentUser, 'username')}
+          email={get(currentUser, 'email')}
+        />
+      )
+    }}
+  </Query>
 )
 
 

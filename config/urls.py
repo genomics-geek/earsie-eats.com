@@ -1,13 +1,22 @@
 from django.conf import settings
-from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from django.views.decorators.csrf import csrf_exempt
 
 from graphene_django.views import GraphQLView
 from rest_framework.routers import DefaultRouter
+
+from earsie_eats_blog.users.views import (
+    FacebookLogin,
+    GitHubLogin,
+    GoogleLogin,
+    InstagramLogin,
+    TwitterLogin,
+)
 
 
 router = DefaultRouter(trailing_slash=False)
@@ -21,8 +30,18 @@ urlpatterns = [
 
     path("api/", include(router.urls)),
     path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
+
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
+
+    # Django REST Auth
+    re_path(r'^rest-auth/', include('rest_auth.urls')),
+    re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    re_path(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
+    re_path(r'^rest-auth/google/$', GoogleLogin.as_view(), name='google_login'),
+    re_path(r'^rest-auth/github/$', GitHubLogin.as_view(), name='github_login'),
+    re_path(r'^rest-auth/instagram/$', InstagramLogin.as_view(), name='instagram_login'),
+    re_path(r'^rest-auth/twitter/$', TwitterLogin.as_view(), name='twitter_login'),
 
     # Django all-auth URLs
     path("home/", TemplateView.as_view(template_name="pages/home.html"), name="home"),

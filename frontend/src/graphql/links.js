@@ -15,7 +15,7 @@ export const httpLink = createHttpLink({
 export const restLink = new RestLink({
   endpoints: {
     default: process.env.REACT_APP_HOST_URL,
-    github: 'https://api.github.com/',
+    auth: '/rest-auth/',
   },
 })
 

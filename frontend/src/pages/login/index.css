@@ -1,0 +1,9 @@
+.ui.container.login-form {
+  width: 65%;
+  padding-top: 5%;
+}
+
+.ui.header.login-form {
+  padding-bottom: 3%;
+  font-family: 'Indie Flower', cursive;
+}

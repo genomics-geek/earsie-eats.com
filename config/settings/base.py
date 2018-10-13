@@ -70,9 +70,17 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'graphene_django',
     'django_filters',
+    'rest_auth',
+    'rest_auth.registration',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.twitter',
 ]
 LOCAL_APPS = [
     'earsie_eats_blog.users.apps.UsersAppConfig',
@@ -98,9 +106,9 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = 'users.User'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = 'users:redirect'
+LOGIN_REDIRECT_URL = '/app/home/'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = 'account_login'
+LOGIN_URL = '/login/'
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -273,9 +281,20 @@ STATICFILES_FINDERS += ['compressor.finders.CompressorFinder']
 # ------------------------------------------------------------------------------
 # https://github.com/ottoyiu/django-cors-headers#cors_origin_allow_all
 CORS_ORIGIN_ALLOW_ALL = True
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 
+# GraphQL
+# django-graphene
+# ------------------------------------------------------------------------------
+# https://docs.graphene-python.org/projects/django/en/latest/
 GRAPHENE = {
     'SCHEMA': 'earsie_eats_blog.graphql.schema.schema'  # Where your Graphene schema lives
 }
+
+# REST APIs for authentication
+# django-rest-auth
+# ------------------------------------------------------------------------------
+# https://django-rest-auth.readthedocs.io
+REST_USE_JWT = True

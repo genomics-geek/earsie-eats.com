@@ -20,3 +20,7 @@
 .ui.secondary.pointing.menu a.AppBar-item.item:hover {
   color: #2185d0;
 }
+
+.ui.menu.AppBar .item>i.icon:hover {
+  color: #2185d0;
+}
