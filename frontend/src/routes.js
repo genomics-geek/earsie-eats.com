@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import { AuthRoute } from 'common/auth'
 import { AsyncLoader } from 'common/loaders'
 import Home from 'pages/home'
+import Login from 'pages/login'
 
 
 const App = Loadable({
@@ -17,6 +18,7 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route path="/app" render={() => <AuthRoute protectedComponent={<App />} />} />
+    <Route exact path="/login/" component={Login} />
   </Switch>
 )
 

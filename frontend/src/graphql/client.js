@@ -23,7 +23,7 @@ const defaultOptions = {
 
 
 const client = new ApolloClient({
-  link: ApolloLink.from([ restLink, authLink.concat(httpLink) ]),
+  link: ApolloLink.from([ authLink.concat(restLink), authLink.concat(httpLink) ]),
   cache: cache,
   connectToDevTools: (process.env.NODE_ENV === 'production') ? false : true,
   defaultOptions,
