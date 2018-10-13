@@ -71,6 +71,8 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'rest_framework',
     'corsheaders',
+    'graphene_django',
+    'django_filters',
 ]
 LOCAL_APPS = [
     'earsie_eats_blog.users.apps.UsersAppConfig',
@@ -273,3 +275,7 @@ STATICFILES_FINDERS += ['compressor.finders.CompressorFinder']
 CORS_ORIGIN_ALLOW_ALL = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+GRAPHENE = {
+    'SCHEMA': 'earsie_eats_blog.graphql.schema.schema'  # Where your Graphene schema lives
+}
