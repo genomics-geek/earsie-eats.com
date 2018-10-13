@@ -21,7 +21,7 @@ const Routes = () => (
     <Route exact path="/" component={Home} />
     <Route path="/app" render={() => <AuthRoute protectedComponent={<Pages />} />} />
     <Route exact path="/login/" component={Login} />
-    <Route path="/register/" component={Register} />
+    <Route path="/register" component={Register} />
   </Switch>
 )
 
