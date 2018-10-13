@@ -4,7 +4,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from django.views.decorators.csrf import csrf_exempt
 
+from graphene_django.views import GraphQLView
 from rest_framework.routers import DefaultRouter
 
 
@@ -15,6 +17,7 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     re_path(r'^app/(?P<route>.*)$', TemplateView.as_view(template_name="index.html"), name='app'),
     path("api/", include(router.urls)),
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
