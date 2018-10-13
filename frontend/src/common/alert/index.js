@@ -15,7 +15,7 @@ export class Alert extends React.Component {
   }
 
   render() {
-    return <div id="alert-notifications"/>
+    return <div id="alert-notifications" />
   }
 }
 

@@ -1,12 +1,12 @@
 import React from 'react'
 
-import './index.css'
-
 import DocumentTitle from 'react-document-title'
 import { Container, Header } from 'semantic-ui-react'
 
+import './index.css'
 
-export const Home = ({ history }) => (
+
+export const Home = () => (
   <div className="Home">
     <DocumentTitle title="Earsie Eats | Home" />
     <Container className="Home-header animated fadeInDown" textAlign="center">
