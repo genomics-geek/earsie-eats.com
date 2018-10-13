@@ -1,4 +1,5 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { Divider, Dropdown, Icon, Menu } from 'semantic-ui-react'
@@ -32,7 +33,6 @@ export const AppBar = ({ authenticated, username, email }) => (
     />
 
     <Menu.Menu position="right">
-
       <Menu.Item name="github">
         <a
           className="AppBar-link"
@@ -43,7 +43,6 @@ export const AppBar = ({ authenticated, username, email }) => (
           <Icon name="github" link size="large" />
         </a>
       </Menu.Item>
-
       <Dropdown item icon={{ name: 'user circle outline', size: 'large' }} simple>
     		<Dropdown.Menu>
     			{authenticated
@@ -60,7 +59,6 @@ export const AppBar = ({ authenticated, username, email }) => (
     			}
     		</Dropdown.Menu>
     	</Dropdown>
-
     </Menu.Menu>
   </Menu>
 )

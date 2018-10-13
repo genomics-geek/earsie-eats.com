@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Loadable from 'react-loadable'
 import { Route, Switch } from 'react-router-dom'
 
@@ -9,7 +10,7 @@ import Login from 'pages/login'
 import Register from 'pages/registration'
 
 
-const App = Loadable({
+const Pages = Loadable({
   loader: () => import('pages'),
   loading: AsyncLoader
 })
@@ -18,7 +19,7 @@ const App = Loadable({
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/app" render={() => <AuthRoute protectedComponent={<App />} />} />
+    <Route path="/app" render={() => <AuthRoute protectedComponent={<Pages />} />} />
     <Route exact path="/login/" component={Login} />
     <Route path="/register/" component={Register} />
   </Switch>

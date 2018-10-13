@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+
+import { get, map, mapKeys, replace } from 'lodash'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-import { get, map, mapKeys, replace } from 'lodash'
 
 import { mutations } from 'common/auth'
 
@@ -40,7 +41,7 @@ class Login extends Component {
 
 		else errors.push(error.mesage)
 
-		onChange({}, {name: 'errors', value: errors})
+		if (onChange) onChange({}, {name: 'errors', value: errors})
 	}
 
 	render() {

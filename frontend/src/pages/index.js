@@ -1,14 +1,15 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+
 import DocumentTitle from 'react-document-title'
+import { Route, Switch } from 'react-router-dom'
 
 import Menu from 'common/app-bar/index'
-import Home from './home'
 import About from './about'
 import Blog from './blog'
+import Home from './home'
 
 
-const App = () => (
+const Pages = () => (
   <DocumentTitle title="Earsie Eats">
     <React.Fragment>
       <Menu />
@@ -24,4 +25,4 @@ const App = () => (
 )
 
 
-export default App
+export default Pages

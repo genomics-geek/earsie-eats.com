@@ -1,8 +1,8 @@
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 
-import { authLink, httpLink, restLink } from './links'
 import cache from './cache'
+import { authLink, httpLink, restLink } from './links'
 
 
 const defaultOptions = {

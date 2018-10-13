@@ -1,12 +1,12 @@
 import React from 'react'
+
+import { get } from 'lodash'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { Redirect, withRouter } from 'react-router-dom'
 import { Loader } from 'semantic-ui-react'
-import { get } from 'lodash'
 
 import Alert from 'common/alert'
-
 import { queries } from 'common/auth'
 
 

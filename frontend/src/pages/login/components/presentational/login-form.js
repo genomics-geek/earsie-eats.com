@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Button, Form, Message } from 'semantic-ui-react'
 
 import { Login } from 'common/auth'
@@ -19,51 +20,51 @@ class LoginForm extends React.Component {
 
     return(
       <Form
-          id="login-form"
-          size="large"
-          key="big"
-          loading={loading}
-					error={errors.length > 0}
-        >
-          <Form.Input
-            id="username"
-            name="username"
-            placeholder="Username"
-            icon="user"
-            iconPosition="left"
-            required
-            onChange={this.handleChange}
-          />
-          <Form.Input
-            id="password"
-            name="password"
-            placeholder="Password"
-            icon="lock"
-            iconPosition="left"
-            required
-            onChange={this.handleChange}
-            type="password"
-          />
+        id="login-form"
+        size="large"
+        key="big"
+        loading={loading}
+				error={errors.length > 0}
+      >
+	      <Form.Input
+	        id="username"
+	        name="username"
+	        placeholder="Username"
+	        icon="user"
+	        iconPosition="left"
+	        required
+	        onChange={this.handleChange}
+	      />
+			  <Form.Input
+			    id="password"
+			    name="password"
+			    placeholder="Password"
+			    icon="lock"
+			    iconPosition="left"
+			    required
+			    onChange={this.handleChange}
+			    type="password"
+			  />
 
-					<Message
-						error
-						list={errors}
+				<Message
+					error
+					list={errors}
+				/>
+
+				<Login
+					username={username}
+					password={password}
+					onChange={this.handleChange}
+				>
+					<Button
+						content="Sign In"
+						primary
+						fluid
+						size="large"
+						disabled={!username || !password}
 					/>
-
-					<Login
-						username={username}
-						password={password}
-						onChange={this.handleChange}
-					>
-						<Button
-							content="Sign In"
-							primary
-							fluid
-							size="large"
-							disabled={!username || !password}
-						/>
-					</Login>
-        </Form>
+				</Login>
+      </Form>
     )
   }
 }

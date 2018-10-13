@@ -21,72 +21,72 @@ class RegisterForm extends React.Component {
 
     return(
       <Form
-          id="login-form"
-          size="large"
-          key="big"
-          loading={loading}
-					error={errors.length > 0}
-        >
-          <Form.Input
-            id="email"
-            name="email"
-            placeholder="Email"
-            icon="mail"
-            iconPosition="left"
-            required
-            onChange={this.handleChange}
-          />
-					<Form.Input
-            id="username"
-            name="username"
-            placeholder="Username"
-            icon="user"
-            iconPosition="left"
-            required
-            onChange={this.handleChange}
-          />
-          <Form.Input
-            id="password1"
-            name="password1"
-            placeholder="Password"
-            icon="lock"
-            iconPosition="left"
-            required
-            onChange={this.handleChange}
-            type="password"
-          />
-					<Form.Input
-            id="password2"
-            name="password2"
-            placeholder="Confirm password"
-            icon="lock"
-            iconPosition="left"
-            required
-            onChange={this.handleChange}
-            type="password"
-          />
+	      id="login-form"
+	      size="large"
+	      key="big"
+	      loading={loading}
+				error={errors.length > 0}
+      >
+        <Form.Input
+          id="email"
+          name="email"
+          placeholder="Email"
+          icon="mail"
+          iconPosition="left"
+          required
+          onChange={this.handleChange}
+        />
+				<Form.Input
+          id="username"
+          name="username"
+          placeholder="Username"
+          icon="user"
+          iconPosition="left"
+          required
+          onChange={this.handleChange}
+        />
+        <Form.Input
+          id="password1"
+          name="password1"
+          placeholder="Password"
+          icon="lock"
+          iconPosition="left"
+          required
+          onChange={this.handleChange}
+          type="password"
+        />
+				<Form.Input
+          id="password2"
+          name="password2"
+          placeholder="Confirm password"
+          icon="lock"
+          iconPosition="left"
+          required
+          onChange={this.handleChange}
+          type="password"
+        />
 
-					<Message
-						error
-						list={errors}
+				<Message
+					error
+					list={errors}
+				/>
+
+				<Register
+					email={email}
+					username={username}
+					password1={password1}
+					password2={password2}
+					onChange={this.handleChange}
+				>
+					<Button
+						content="Sign Up!"
+						secondary
+						fluid
+						size="large"
+						disabled={!email || !username || !password1 || !password2}
 					/>
-
-					<Register
-						email={email}
-						username={username}
-						password1={password1}
-						password2={password2}
-						onChange={this.handleChange}
-					>
-						<Button
-							content="Sign Up!"
-							secondary
-							fluid
-							size="large"
-							disabled={!email || !username || !password1 || !password2}
-						/>
-					</Register>
-        </Form>
+				</Register>
+      </Form>
     )
   }
 }

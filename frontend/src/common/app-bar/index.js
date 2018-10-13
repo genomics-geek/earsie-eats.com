@@ -1,7 +1,8 @@
 import React from 'react'
+
+import { get } from 'lodash'
 import { Query } from 'react-apollo'
 import { Loader } from 'semantic-ui-react'
-import { get } from 'lodash'
 
 import { queries } from 'common/auth'
 import Alert from 'common/alert'
@@ -17,7 +18,6 @@ export const AppBar = () => (
       if (error) return <Alert type="error" message={`Authentication: ${error.message}`} />
 
       const currentUser = get(data, 'currentUser')
-
       let authenticated = false
       if (currentUser) authenticated = true
 

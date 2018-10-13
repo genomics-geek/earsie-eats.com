@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+
+import { get, map, mapKeys } from 'lodash'
 import PropTypes from 'prop-types'
 import { withAlert } from 'react-alert'
 import { Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
-import { get, map, mapKeys } from 'lodash'
 
 import { mutations } from 'common/auth'
 
