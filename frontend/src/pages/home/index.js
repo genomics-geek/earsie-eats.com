@@ -11,7 +11,7 @@ export const Home = ({ history }) => (
     <DocumentTitle title="Earsie Eats | Home" />
     <Container className="Home-header animated fadeInDown" textAlign="center">
       <Header size="huge" content="Earsie Eats Blog" />
-      <Header size="large" content="Food. Food. Food." />
+      <Header className="detail" size="large" content="Food. Food. Food." />
     </Container>
   </div>
 )
