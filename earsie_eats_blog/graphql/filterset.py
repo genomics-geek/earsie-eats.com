@@ -1,6 +1,6 @@
 import itertools
 
-from django.db.models import CharField
+from django.db.models import CharField, ImageField
 
 from django_filters import BaseInFilter, CharFilter, FilterSet
 from django_filters.filterset import FILTER_FOR_DBFIELD_DEFAULTS
@@ -13,6 +13,10 @@ FILTER_OVERRIDES = {
     CharField: {
         'filter_class': CharFilter,
         'extra': lambda f: {'lookup_expr': 'iexact'}
+    },
+    ImageField: {
+        'filter_class': CharFilter,
+        'extra': lambda f: {'lookup_expr': 'iexact'},
     },
 }
 
