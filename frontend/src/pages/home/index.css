@@ -1,5 +1,5 @@
 .Home {
-  background: url(https://s3.amazonaws.com/earsie-eats.com/pexels-photo-616330.jpeg) no-repeat center center;
+  background: url(https://s3.amazonaws.com/earsie-eats.com/home-backgroud.jpg) no-repeat center center;
   opacity: 0.8;
   position: absolute;
   width: 100%;
@@ -29,4 +29,9 @@
 
 .Home-header .ui.huge.header {
   font-size: 75px;
+}
+
+.Home-header .ui.header.detail {
+  font-family: 'Indie Flower', cursive;
+  font-size: 35px;
 }

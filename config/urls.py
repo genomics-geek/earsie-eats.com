@@ -14,17 +14,23 @@ router = DefaultRouter(trailing_slash=False)
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="index.html"), name='app'),
-    re_path(r'^app/(?P<route>.*)$', TemplateView.as_view(template_name="index.html"), name='app'),
+    # React UI routes
+    re_path(r'^$', TemplateView.as_view(template_name="index.html")),
+    re_path(r'^app/(?P<route>.*)$', login_required(TemplateView.as_view(template_name="index.html")), name='app'),
+    re_path(r'^login/', TemplateView.as_view(template_name="index.html"), name="login"),
+
     path("api/", include(router.urls)),
     path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
+    # Django Admin, use {% url 'admin:index' %}
+    path(settings.ADMIN_URL, admin.site.urls),
+
+    # Django all-auth URLs
+    path("home/", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
         name="about",
     ),
-    # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path(
         "users/",
