@@ -1,7 +1,28 @@
+from collections import OrderedDict
+from django.conf import settings
 from django.db.models import Q
 
-from django_filters import BaseInFilter, Filter
+from django_filters import BaseInFilter, Filter, TypedChoiceFilter
 from graphql_relay import from_global_id
+
+
+class DisplayChoiceFilter(TypedChoiceFilter):
+
+    def __init__(self, *args, **kwargs):
+        empty_label = getattr(settings, 'NULL_CHOICE_LABEL', '---------')
+        empty_value = getattr(settings, 'NULL_CHOICE_VALUE', None)
+
+        choices = kwargs.pop('choices')
+        kwargs['choices'] = [(empty_value, empty_label)] + [(y, y) for x, y in choices]
+        kwargs['coerce'] = lambda x: self.coerce(x, choices)
+
+        super(DisplayChoiceFilter, self).__init__(*args, **kwargs)
+
+    @staticmethod
+    def coerce(x, choices):
+        for key, value in OrderedDict(choices).items():
+            if value.lower() == x.lower():
+                return key
 
 
 class GlobalIDFilter(Filter):
@@ -14,8 +35,9 @@ class GlobalIDFilter(Filter):
 class GlobalIDInFilter(BaseInFilter):
 
     def filter(self, qs, value):
-        gids = [from_global_id(v)[1] for v in value]
-        return super(GlobalIDInFilter, self).filter(qs, gids)
+        if value:
+            value = [from_global_id(v)[1] for v in value]
+        return super(GlobalIDInFilter, self).filter(qs, value)
 
 
 class SearchFilter(Filter):

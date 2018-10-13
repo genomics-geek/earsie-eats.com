@@ -81,10 +81,13 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.instagram',
     'allauth.socialaccount.providers.twitter',
+    'user_activities',
+    'reversion',
 ]
 LOCAL_APPS = [
     'earsie_eats_blog.users.apps.UsersAppConfig',
     # Your stuff: custom apps go here
+    'earsie_eats_blog.recipes.apps.RecipesConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

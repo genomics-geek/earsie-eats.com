@@ -12,6 +12,18 @@ class UsersQuery(object):
         filterset_class=filters.UserFilter,
     )
 
+    user_activity = Node.Field(types.UserActivityNode)
+    all_user_activities = ProtectedConnectionField(
+        types.UserActivityNode,
+        filterset_class=filters.UserActivityFilter,
+    )
+
+    user_comment = Node.Field(types.UserCommentNode)
+    all_user_comments = ProtectedConnectionField(
+        types.UserCommentNode,
+        filterset_class=filters.UserCommentFilter,
+    )
+
     auth_group = Node.Field(types.AuthGroupNode)
     all_auth_groups = ProtectedConnectionField(
         types.AuthGroupNode,
