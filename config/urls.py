@@ -37,6 +37,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
 
     # Django REST Auth
+    re_path(r'^auth/', include('django.contrib.auth.urls')),
     re_path(r'^rest-auth/', include('rest_auth.urls')),
     re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     re_path(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
