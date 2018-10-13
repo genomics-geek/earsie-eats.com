@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=earsie_eats_blog
+POSTGRES_USER=wlxYzFcelVDetrQjVruFKEUjXSPJYhva
+POSTGRES_PASSWORD=cbpQi2KD2LhKni7t6JoGifSuuHWANqVT7YIh3OJd2vtbLzzDmbHgfgJXOrjNDbvB

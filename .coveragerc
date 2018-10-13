@@ -1,0 +1,5 @@
+[run]
+include = earsie_eats_blog/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
