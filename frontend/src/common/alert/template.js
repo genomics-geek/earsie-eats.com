@@ -44,7 +44,7 @@ const AlertTemplate = ({ message, options, style, close }) => (
     color={getColor(options.type)}
     icon={getIcon(options.type)}
     onDismiss={close}
-    size="mini"
+    size="large"
   />
 )
 
