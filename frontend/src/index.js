@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
+import 'react-quill/dist/quill.snow.css'
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
 
