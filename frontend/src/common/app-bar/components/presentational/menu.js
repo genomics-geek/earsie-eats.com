@@ -15,7 +15,7 @@ export const AppBar = ({ authenticated, username, email }) => (
       as={NavLink}
       to="/app/home/"
     >
-      <Icon name="food" color="blue" />
+      <img alt="" src="https://s3.amazonaws.com/earsie-eats.com/logo.png" />
     </Menu.Item>
     <Menu.Item
       className="AppBar-item"
@@ -26,10 +26,10 @@ export const AppBar = ({ authenticated, username, email }) => (
     />
     <Menu.Item
       className="AppBar-item"
-      name="blog"
-      icon="comments outline"
+      name="recipes"
+      icon="food"
       as={NavLink}
-      to="/app/blog/"
+      to="/app/recipes/"
     />
 
     <Menu.Menu position="right">
