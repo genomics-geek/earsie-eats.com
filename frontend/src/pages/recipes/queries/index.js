@@ -3,10 +3,17 @@ import { Recipe } from '../fragments'
 
 
 export const RECIPE_LIST_QUERY = gql`
-query allRecipes($id_In: String!, $author: ID) {
-  allRecipes(id_In: $id_In, author: $author, active: true) {
+query allRecipes($id_In: String, $author: ID, $search: String, $ingredients: String) {
+  allRecipes(id_In: $id_In, author: $author, search: $search, ingredients: $ingredients, active: true) {
 		edges {
-      node {...ReceipeParts}
+      node {
+        ...RecipeParts
+        totalComments
+        totalDownVotes
+        totalIngredients
+        totalSteps
+        totalUpVotes
+      }
 	  }
   }
 }
@@ -17,7 +24,23 @@ ${Recipe.fragments.default}
 export const RECIPE_DETAIL_QUERY = gql`
 query recipe($id: ID!) {
   recipe(id: $id) {
-    ...ReceipeParts
+    ...RecipeParts
+    ingredients {
+      edges {
+        node {
+          id
+          label
+        }
+      }
+    }
+    steps {
+      edges {
+        node {
+          id
+          label
+        }
+      }
+    }
   }
   currentUser {
 		id

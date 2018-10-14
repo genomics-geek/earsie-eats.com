@@ -12,7 +12,7 @@ from .filters import GlobalIDInFilter
 FILTER_OVERRIDES = {
     CharField: {
         'filter_class': CharFilter,
-        'extra': lambda f: {'lookup_expr': 'iexact'}
+        'extra': lambda f: {'lookup_expr': 'icontains'}
     },
     ImageField: {
         'filter_class': CharFilter,

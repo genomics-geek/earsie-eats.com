@@ -14,7 +14,7 @@ const RecipeView = ({ data, currentUser }) => (
 		<Grid.Row textAlign="center">
 			<Grid.Column width={16}>
 				<Container>
-					<Header className="Recipe-title" content={get(data, 'title')}/>
+					<Header className="Recipe-details-title" content={get(data, 'title')}/>
 				</Container>
 
 				<RecipePostDetails
@@ -46,7 +46,7 @@ const RecipeView = ({ data, currentUser }) => (
 			<Grid.Column width={8}>
 				<Segment textAlign="left" raised>
 					<Header
-						className="Recipe-list"
+						className="Recipe-details-list-header"
 						content="Ingredients"
 						icon="food"
 						style={{ fontFamily: 'Indie Flower', fontSize: '25px' }}
@@ -58,7 +58,7 @@ const RecipeView = ({ data, currentUser }) => (
 			<Grid.Column width={8}>
 				<Segment textAlign="left" raised>
 					<Header
-						className="Recipe-list"
+						className="Recipe-details-list-header"
 						textAlign="center"
 						content="Steps"
 						icon="list ol"
@@ -84,7 +84,7 @@ RecipeView.propTypes = {
 		}),
 		title: PropTypes.string,
 		description: PropTypes.string,
-		image: PropTypes.string,
+		imageUrl: PropTypes.string,
 		published: PropTypes.string,
 		isPublished: PropTypes.bool,
 		prepTime: PropTypes.number,

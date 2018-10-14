@@ -48,6 +48,7 @@ class SearchFilter(Filter):
 
     def filter(self, qs, value):
         filter = Q()
-        for search_field in self.search_fields:
-            filter |= Q(**{'{0}__icontains'.format(search_field): value})
+        if value:
+            for search_field in self.search_fields:
+                filter |= Q(**{'{0}__icontains'.format(search_field): value})
         return qs.filter(filter).distinct()
