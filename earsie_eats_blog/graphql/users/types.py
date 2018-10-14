@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
-from graphene import Node, String
+from graphene import Int, Node, ObjectType, String
 from graphene_django import DjangoObjectType
 from user_activities.models import Activity, Comment
 
@@ -52,3 +52,10 @@ class ContentTypeNode(LoginRequiredMixin, PrimaryKeyMixin, DjangoObjectType):
     class Meta:
         model = ContentType
         interfaces = (Node, )
+
+
+class ActivityCounts(ObjectType):
+    up_votes = Int()
+    down_votes = Int()
+    user_up_votes = Int()
+    user_down_votes = Int()

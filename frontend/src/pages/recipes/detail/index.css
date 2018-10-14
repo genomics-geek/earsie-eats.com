@@ -1,0 +1,18 @@
+.ui.feed.Recipe-details {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.ui.header.Recipe-title {
+  font-family: 'Indie Flower', cursive;
+  font-size: 55px;
+}
+
+.ui.header.Recipe-title .sub.header {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+}
+
+.ui.header.Recipe-list>.icon {
+  font-size: 1em;
+}
