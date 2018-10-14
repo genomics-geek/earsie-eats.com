@@ -9,12 +9,12 @@ import UserActivity from 'common/user-activity'
 
 
 const RecipePostDetails = ({ pk, author, published, currentUser }) => (
-	<Feed className="Recipe-details" size="large">
+	<Feed className="Recipe-details-feed" size="large">
 		<Feed.Event>
 			<Feed.Content>
 				<Feed.Summary>
-					<Feed.User>{get(author, 'username')}</Feed.User> published this recipe
-					<Feed.Date>{moment(published).fromNow()}</Feed.Date>
+					<Feed.User>{get(author, 'username')}</Feed.User> published this recipe &nbsp;
+					<Feed.User>{moment(published).fromNow()}</Feed.User>
 					&nbsp;&nbsp;
 					<UserActivity
 						app="recipes"

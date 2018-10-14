@@ -30,9 +30,6 @@ export const getIcon = type => {
 }
 
 
-export const messageTrimmer = message => message.replace('GraphQL error:', '').trim()
-
-
 const AlertTemplate = ({ message, options, style, close }) => (
   // the style contains only the margin given as offset
   // options contains all alert given options
@@ -40,7 +37,7 @@ const AlertTemplate = ({ message, options, style, close }) => (
   // close is a function that closes the alert
   <Message
     style={style}
-    content={messageTrimmer(message)}
+    content={message}
     color={getColor(options.type)}
     icon={getIcon(options.type)}
     onDismiss={close}
@@ -51,7 +48,7 @@ const AlertTemplate = ({ message, options, style, close }) => (
 
 AlertTemplate.propTypes = {
   close: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.any.isRequired,
   options: PropTypes.shape({
     type: PropTypes.string
   }),

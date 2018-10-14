@@ -11,13 +11,11 @@ import Alert from 'common/alert'
 import { RECIPE_DETAIL_QUERY } from '../queries'
 import RecipeView from './components/presentational/recipe-view'
 
-import './index.css'
-
 
 const Detail = ({ match }) => (
 	<Query query={RECIPE_DETAIL_QUERY} variables={{ id: get(match, 'params.recipeId') }}>
 		{({ loading, error, data }) => {
-			if (loading) return <Loader active size="tiny" />
+			if (loading) return <Loader active size="large" />
 			if (error) return <Alert type="error" message={`Recipe: ${error.message}`} />
 
 			return <RecipeView data={get(data, 'recipe')} currentUser={get(data, 'currentUser.id')} />
