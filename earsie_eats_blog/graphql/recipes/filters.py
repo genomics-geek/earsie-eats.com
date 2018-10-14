@@ -3,12 +3,15 @@ from django.db.models import F
 from django_filters import NumberFilter
 
 from earsie_eats_blog.recipes import models
+from ..filters import GlobalIDInFilter, SearchFilter
 from ..filterset import BaseFilterSet
 
 
 class RecipeFilter(BaseFilterSet):
 
     total_time = NumberFilter(label='Total Time', method='filter_total_time')
+    search = SearchFilter(search_fields=['title', 'description'])
+    ingredients = GlobalIDInFilter(field_name='ingredients__id', distinct=True)
 
     class Meta:
         model = models.Recipe

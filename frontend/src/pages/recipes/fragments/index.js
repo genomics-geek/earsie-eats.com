@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 const Recipe = {}
 Recipe.fragments = {
   default: gql`
-    fragment ReceipeParts on RecipeNode {
+    fragment RecipeParts on RecipeNode {
       id
       pk
       author {
@@ -14,7 +14,7 @@ Recipe.fragments = {
       }
       title
       description
-      image
+      imageUrl
       published
       isPublished
       prepTime
@@ -22,22 +22,6 @@ Recipe.fragments = {
       totalTime
       servingSize
       active
-      ingredients {
-        edges {
-          node {
-            id
-            label
-          }
-        }
-      }
-      steps {
-        edges {
-          node {
-            id
-            label
-          }
-        }
-      }
     }
   `,
 }

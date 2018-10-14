@@ -3,16 +3,16 @@
   margin: 0 auto;
 }
 
-.ui.header.Recipe-title {
+.ui.header.Recipe-details-title {
   font-family: 'Indie Flower', cursive;
   font-size: 55px;
 }
 
-.ui.header.Recipe-title .sub.header {
+.ui.header.Recipe-details-title .sub.header {
   font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
 }
 
-.ui.header.Recipe-list>.icon {
+.ui.header.Recipe-details-list-header>.icon {
   font-size: 1em;
 }
