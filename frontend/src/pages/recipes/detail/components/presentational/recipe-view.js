@@ -8,7 +8,7 @@ import RecipeList from './recipe-list'
 import RecipePostDetails from './recipe-post-details'
 
 
-const RecipeView = ({ data }) => (
+const RecipeView = ({ data, currentUser }) => (
 	<Grid padded>
 
 		<Grid.Row textAlign="center">
@@ -20,6 +20,7 @@ const RecipeView = ({ data }) => (
 				<RecipePostDetails
 					pk={get(data, 'pk')}
 					author={get(data, 'author')}
+					currentUser={currentUser}
 					published={get(data, 'published')}
 				/>
 			</Grid.Column>
@@ -85,7 +86,7 @@ RecipeView.propTypes = {
 		description: PropTypes.string,
 		image: PropTypes.string,
 		published: PropTypes.string,
-		isPublished: PropTypes.string,
+		isPublished: PropTypes.bool,
 		prepTime: PropTypes.number,
 		cookTime: PropTypes.number,
 		totalTime: PropTypes.number,
@@ -107,7 +108,8 @@ RecipeView.propTypes = {
 				})
 			}))
 		}),
-	})
+	}),
+	currentUser: PropTypes.string,
 }
 
 

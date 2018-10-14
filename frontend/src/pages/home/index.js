@@ -18,7 +18,7 @@ export const Home = ({ history }) => (
         content="Check out the blog!"
         color="red"
         size="massive"
-        onClick={() => history.push('/app/blog/')}
+        onClick={() => history.push('/app/recipes/')}
       />
     </Container>
   </div>

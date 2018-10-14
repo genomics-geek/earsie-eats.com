@@ -20,7 +20,7 @@ const Detail = ({ match }) => (
 			if (loading) return <Loader active size="tiny" />
 			if (error) return <Alert type="error" message={`Recipe: ${error.message}`} />
 
-			return <RecipeView data={get(data, 'recipe')} />
+			return <RecipeView data={get(data, 'recipe')} currentUser={get(data, 'currentUser.id')} />
 		}}
 	</Query>
 )

@@ -14,7 +14,15 @@ const UserAction = ({ alert, children, activityType, app, model, objectId, user,
 		onCompleted={refetch}
 		onError={error => alert.error("User activity failed! " + error.message)}
 	>
-		{update => React.cloneElement(children, {onClick: update})}
+		{update => {
+			return React.cloneElement(
+				children,
+				{onClick: () => {
+					if (user) update()
+					else alert.error("Must be logged in to vote on recipes!")
+				}}
+			)
+		}}
 	</Mutation>
 )
 

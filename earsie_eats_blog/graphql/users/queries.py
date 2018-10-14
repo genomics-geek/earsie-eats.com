@@ -56,7 +56,7 @@ class UsersQuery(object):
 
     activity_counts = Field(
         types.ActivityCounts,
-        user=ID(required=True),
+        user=ID(),
         app=String(required=True),
         model=String(required=True),
         object_id=Int(required=True)
@@ -65,28 +65,22 @@ class UsersQuery(object):
     def resolve_activity_counts(self, info, **kwargs):
         up_vote = getattr(ACTIVITY_TYPES, 'up_vote')
         down_vote = getattr(ACTIVITY_TYPES, 'down_vote')
-        _, user_pk = from_global_id(kwargs['user'])
 
-        up_votes = Count(
-            'pk',
-            filter=(Q(activity_type=up_vote) & Q(active=True)),
-            distinct=True
-        )
-        user_up_votes = Count(
-            'pk',
-            filter=(Q(activity_type=up_vote) & Q(user__pk=user_pk) & Q(active=True)),
-            distinct=True
-        )
-        down_votes = Count(
-            'pk',
-            filter=(Q(activity_type=down_vote) & Q(active=True)),
-            distinct=True
-        )
-        user_down_votes = Count(
-            'pk',
-            filter=(Q(activity_type=down_vote) & Q(user__pk=user_pk) & Q(active=True)),
-            distinct=True
-        )
+        # NOTE: This is to filter out user votes
+        user_pk = -1
+        if kwargs.get('user'):
+            _, user_pk = from_global_id(kwargs['user'])
+
+        user_filter = Q(user__pk=user_pk)
+        up_votes_filter = Q(activity_type=up_vote) & Q(active=True)
+        down_votes_filter = Q(activity_type=down_vote) & Q(active=True)
+        user_up_votes_filter = up_votes_filter & user_filter
+        user_down_votes_filter = down_votes_filter & user_filter
+
+        up_votes = Count('pk', filter=up_votes_filter, distinct=True)
+        user_up_votes = Count('pk', filter=user_up_votes_filter, distinct=True)
+        down_votes = Count('pk', filter=down_votes_filter, distinct=True)
+        user_down_votes = Count('pk', filter=user_down_votes_filter, distinct=True)
 
         result = Activity.objects \
             .filter(

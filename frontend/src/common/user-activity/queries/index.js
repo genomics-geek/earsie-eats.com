@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 export const ACTIVITY_COUNTS_QUERY = gql`
 query activityCounts(
-	$user: ID!,
+	$user: ID,
 	$app: String!,
 	$model: String!,
 	$objectId: Int!

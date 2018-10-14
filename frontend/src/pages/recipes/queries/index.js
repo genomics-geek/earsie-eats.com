@@ -19,6 +19,11 @@ query recipe($id: ID!) {
   recipe(id: $id) {
     ...ReceipeParts
   }
+  currentUser {
+		id
+    email
+		username
+	}
 }
 ${Recipe.fragments.default}
 `

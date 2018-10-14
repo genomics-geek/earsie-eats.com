@@ -8,7 +8,7 @@ import { Feed } from 'semantic-ui-react'
 import UserActivity from 'common/user-activity'
 
 
-const RecipePostDetails = ({ pk, author, published }) => (
+const RecipePostDetails = ({ pk, author, published, currentUser }) => (
 	<Feed className="Recipe-details" size="large">
 		<Feed.Event>
 			<Feed.Content>
@@ -20,7 +20,7 @@ const RecipePostDetails = ({ pk, author, published }) => (
 						app="recipes"
 						model="recipe"
 						objectId={pk}
-						userId={get(author, 'id')}
+						userId={currentUser}
 					/>
 				</Feed.Summary>
 			</Feed.Content>
@@ -36,6 +36,7 @@ RecipePostDetails.propTypes = {
 		username: PropTypes.string.isRequired,
 	}).isRequired,
 	published: PropTypes.string,
+	currentUser: PropTypes.string,
 }
 
 
