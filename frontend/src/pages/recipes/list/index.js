@@ -2,6 +2,7 @@ import React from 'react'
 
 import { get } from 'lodash'
 import { Query } from 'react-apollo'
+import DocumentTitle from 'react-document-title'
 import { Grid, Header, Loader } from 'semantic-ui-react'
 
 import Alert from 'common/alert'
@@ -23,6 +24,7 @@ const List = () => (
 
 			return (
 				<div className="Recipe-list">
+					<DocumentTitle title="Earsie Eats | Recipes"/>
 					<Grid padded>
 						<Grid.Row textAlign="center">
 								<Grid.Column width={16}>
