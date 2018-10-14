@@ -31,7 +31,7 @@ const Routes = () => (
       <Route path="/app/recipes/" component={Recipes} />
       <Route exact path="/login/" component={Login} />
       <Route path="/register/" component={Register} />
-      <Route path="/management/" render={() => <AuthRoute protectedComponent={<PrivateRoutes />} />} />
+      <Route path="/management/" render={() => <AuthRoute staffOnly protectedComponent={<PrivateRoutes />} />} />
     </Switch>
   </React.Fragment>
 )
