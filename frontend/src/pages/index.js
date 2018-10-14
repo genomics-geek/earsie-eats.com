@@ -7,6 +7,7 @@ import Menu from 'common/app-bar/index'
 import About from './about'
 import Blog from './blog'
 import Home from './home'
+import Recipes from './recipes'
 
 
 const Pages = () => (
@@ -19,6 +20,7 @@ const Pages = () => (
         <Route exact path="/app/home/" component={Home} />
         <Route exact path="/app/about/" component={About} />
         <Route exact path="/app/blog/" component={Blog} />
+        <Route path="/app/recipes/" component={Recipes} />
       </Switch>
     </React.Fragment>
   </DocumentTitle>
