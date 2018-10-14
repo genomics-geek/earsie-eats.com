@@ -46,3 +46,8 @@
 .ui.header.Recipe-details-list-header>.icon {
   font-size: 1em;
 }
+
+/*  Create */
+.Recipe-editor .ql-editor {
+  min-height: 25em;
+}
