@@ -19,7 +19,12 @@ const UserAction = ({ alert, children, activityType, app, model, objectId, user,
 				children,
 				{onClick: () => {
 					if (user) update()
-					else alert.error("Must be logged in to vote on recipes!")
+					else alert.error(
+						<p>
+							Must be logged in to vote on recipes!
+							Click <a target="_blank" href="/login/">here</a> to log in!
+						</p>
+					)
 				}}
 			)
 		}}

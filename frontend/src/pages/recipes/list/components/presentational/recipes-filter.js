@@ -19,11 +19,11 @@ class RecipeFilter extends Component {
 	}
 
 	render() {
-		const { numberOfRecipes } = this.props
+		const { numberOfRecipes, loading } = this.props
 		const { search, ingredients } = this.state
 
 		return (
-			<Segment>
+			<Segment loading={loading}>
 				<Header content="Filter Recipes"/>
 				<Form>
 					<Form.Input
@@ -69,11 +69,13 @@ class RecipeFilter extends Component {
 RecipeFilter.propTypes = {
 	refetch: PropTypes.func.isRequired,
 	numberOfRecipes: PropTypes.number,
+	loading: PropTypes.bool,
 }
 
 
 RecipeFilter.defaultProps = {
-	numberOfRecipes: 0
+	numberOfRecipes: 0,
+	loading: false,
 }
 
 

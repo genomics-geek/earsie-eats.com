@@ -1,0 +1,48 @@
+.Recipe {
+  background: url(https://s3.amazonaws.com/earsie-eats.com/recipe-background.jpg) no-repeat center center;
+  opacity: 0.95;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/*  List view */
+
+.ui.header.Recipe-list-title {
+  font-family: 'Indie Flower', cursive;
+  font-size: 55px;
+}
+
+/* Detail view  */
+
+.ui.header.Recipe-details-title {
+  font-family: 'Indie Flower', cursive;
+  font-size: 50px;
+}
+
+.ui.feed.Recipe-details-feed {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.ui.feed.Recipe-details-feed>.event>.content .summary {
+  font-size: 20px;
+}
+
+.Recipe-details-description p,
+.Recipe-details-description h1,
+.Recipe-details-description h2,
+.Recipe-details-description h3,
+.Recipe-details-description h4,
+.Recipe-details-description h5,
+.Recipe-details-description h6 {
+  font-family: 'Indie Flower', cursive;
+}
+
+.Recipe-details-description {
+  font-size: 20px;
+}
+
+.ui.header.Recipe-details-list-header>.icon {
+  font-size: 1em;
+}
