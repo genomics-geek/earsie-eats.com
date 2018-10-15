@@ -3,15 +3,17 @@ import React, { Component } from 'react'
 import { concat, get, without } from 'lodash'
 import PropTypes from 'prop-types'
 import { withAlert } from 'react-alert'
+import { withRouter } from 'react-router-dom'
 import { Button, Grid } from 'semantic-ui-react'
 
 import { api } from 'common/api'
 import RecipeDetailsForm from './recipe-details-form'
 import RecipeAddSegment from './recipe-add-segment'
 import CreateOrEditRecipe from '../smart/create-or-edit-recipe'
+import * as mutations from 'pages/recipes/mutations'
 
 
-class EditRecipeForm extends Component {
+class RecipeForm extends Component {
 	state = {
 		prevRecipeID: this.props.recipeId,
 		title: this.props.defaultTitle,
@@ -58,20 +60,41 @@ class EditRecipeForm extends Component {
 	onTextEdit = value => this.setState({ description: value })
 
 	onCompleted = data => {
-		const { alert } = this.props
+		const { mode } = this.props
+		const file = get(this.fileUpload, 'files[0]')
 
-		const form = new FormData()
-		form.append('recipe', get(data, 'createRecipe.recipe.pk'))
-	  form.append('image', get(this.fileUpload, 'files[0]'))
+		if (file) {
+			const { alert } = this.props
 
-    api.put("/recipes/upload-image/", form, {
-      headers: {
-          'Content-Type': 'multipart/form-data',
-          'credentials': 'same-origin'
-        }
-    })
-    .then(response => alert.success('Image Added!'))
-    .catch(error => alert.error(error.message))
+			let recipePK = get(data, 'createRecipe.recipe.pk')
+			if (mode === 'edit') {
+				recipePK = get(data, 'editRecipe.recipe.pk')
+			}
+
+			const form = new FormData()
+			form.append('recipe', recipePK)
+		  form.append('image', file)
+
+	    api.put("/recipes/upload-image/", form, {
+	      headers: {
+	          'Content-Type': 'multipart/form-data',
+	          'credentials': 'same-origin'
+	        }
+	    })
+	    .then(response => alert.success('Image Added!'))
+	    .catch(error => alert.error(error.message))
+		}
+
+		if (mode === 'add') {
+
+			let recipeID = get(data, 'createRecipe.recipe.id')
+			if (mode === 'edit') {
+				recipeID = get(data, 'editRecipe.recipe.id')
+			}
+
+			const { history } = this.props
+			history.push(`/management/recipes/edit/${recipeID}`)
+		}
 	}
 
 	isDisabled = () => {
@@ -86,6 +109,8 @@ class EditRecipeForm extends Component {
 	}
 
 	render() {
+		const { mode, recipeId } = this.props
+
 		const {
 			title,
 			cookTime,
@@ -98,13 +123,18 @@ class EditRecipeForm extends Component {
 			steps,
 		} = this.state
 
+		let mutation = mutations.CREATE_RECIPE_MUTATION
+		if (mode === 'edit') mutation = mutations.EDIT_RECIPE_MUTATION
+
 		return (
 			<div className="Manage-Recipe">
 				<Grid padded style={{ opacity: '0.90' }}>
 					<Grid.Row style={{ paddingBottom: '0px' }}>
 						<Grid.Column width={16}>
 							<CreateOrEditRecipe
+								mutation={mutation}
 								variables={{
+									id: recipeId,
 									title,
 									description,
 									servingSize,
@@ -119,7 +149,6 @@ class EditRecipeForm extends Component {
 								<Button
 									icon="save"
 									color="black"
-									inverted
 									size="large"
 									content="Save Recipe!"
 									disabled={this.isDisabled()}
@@ -171,7 +200,9 @@ class EditRecipeForm extends Component {
 }
 
 
-EditRecipeForm.propTypes = {
+RecipeForm.propTypes = {
+	mode: PropTypes.oneOf(['add', 'edit']).isRequired,
+	history: PropTypes.object.isRequired,
 	recipeId: PropTypes.string,
 	defaultTitle: PropTypes.string,
 	defaultImage: PropTypes.string,
@@ -185,7 +216,7 @@ EditRecipeForm.propTypes = {
 }
 
 
-EditRecipeForm.defaultProps = {
+RecipeForm.defaultProps = {
 	recipeId: '',
 	defaultTitle: '',
 	defaultImage: '',
@@ -199,4 +230,4 @@ EditRecipeForm.defaultProps = {
 }
 
 
-export default withAlert(EditRecipeForm)
+export default withAlert(withRouter(RecipeForm))

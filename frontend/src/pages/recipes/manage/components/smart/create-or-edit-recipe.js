@@ -4,12 +4,10 @@ import PropTypes from 'prop-types'
 import { withAlert } from 'react-alert'
 import { Mutation } from 'react-apollo'
 
-import { CREATE_RECIPE_MUTATION } from 'pages/recipes/mutations'
 
-
-const CreateOrEditRecipe = ({ alert, children, onCompleted, variables }) => (
+const CreateOrEditRecipe = ({ mutation, alert, children, onCompleted, variables }) => (
 	<Mutation
-		mutation={CREATE_RECIPE_MUTATION}
+		mutation={mutation}
 		variables={variables}
 		onCompleted={data => {
 			alert.success('Recipe saved!')
@@ -23,6 +21,7 @@ const CreateOrEditRecipe = ({ alert, children, onCompleted, variables }) => (
 
 
 CreateOrEditRecipe.propTypes = {
+	mutation: PropTypes.object.isRequired,
 	alert: PropTypes.object.isRequired,
 	children: PropTypes.node.isRequired,
 	onCompleted: PropTypes.func,
