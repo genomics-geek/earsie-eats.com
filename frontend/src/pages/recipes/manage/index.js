@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 import { Loader } from 'semantic-ui-react'
 
 import Alert from 'common/alert'
-import EditRecipeForm from './components/presentational/recipe-edit-form'
+import RecipeForm from './components/presentational/recipe-form'
 import { RECIPE_DETAIL_QUERY } from 'pages/recipes/queries'
 
 import './index.css'
@@ -25,7 +25,8 @@ const ManageRecipe = ({ match }) => {
 					if (error) return <Alert type="error" message={`Loading Recipe: ${error.message}`} />
 
 					return (
-						<EditRecipeForm
+						<RecipeForm
+							mode="edit"
 							recipeId={recipeId}
 							defaultTitle={get(data, 'recipe.title')}
 							defaultImage={get(data, 'recipe.imageUrl')}
@@ -43,7 +44,7 @@ const ManageRecipe = ({ match }) => {
 		)
 	}
 
-	return <EditRecipeForm />
+	return <RecipeForm mode="add" />
 }
 
 

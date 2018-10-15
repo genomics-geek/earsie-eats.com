@@ -28,3 +28,33 @@ mutation createRecipe(
 }
 ${Recipe.fragments.default}
 `
+
+
+export const EDIT_RECIPE_MUTATION = gql`
+mutation editRecipe(
+	$id: ID!,
+	$title: String!,
+  $description: String!,
+  $cookTime: Float!,
+  $prepTime: Float!
+  $servingSize: Float!,
+	$steps: [String],
+	$ingredients: [String],
+  $active: Boolean,
+) {
+  editRecipe(
+		id: $id,
+  	title: $title,
+    description: $description,
+    cookTime: $cookTime,
+    prepTime: $prepTime,
+    servingSize: $servingSize,
+		steps: $steps,
+		ingredients: $ingredients,
+    active: $active
+  ) {
+    recipe {...RecipeParts}
+  }
+}
+${Recipe.fragments.default}
+`
