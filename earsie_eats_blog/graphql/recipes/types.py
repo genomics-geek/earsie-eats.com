@@ -21,6 +21,14 @@ class RecipeNode(PrimaryKeyMixin, DjangoObjectType):
         model = models.Recipe
         interfaces = (Node, )
 
+    @classmethod
+    def get_node(cls, info, pk):
+        return models.Recipe.objects \
+            .select_related('author') \
+            .prefetch_related('ingredients') \
+            .prefetch_related('steps') \
+            .get(pk=pk)
+
 
 class IngredientNode(PrimaryKeyMixin, DjangoObjectType):
     class Meta:

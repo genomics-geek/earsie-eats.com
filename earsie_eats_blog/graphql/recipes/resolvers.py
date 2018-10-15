@@ -1,9 +1,6 @@
 import os
 
 from django.conf import settings
-from django.db.models import Q
-
-from user_activities.choices import ACTIVITY_TYPES
 
 
 def resolve_image_url(root, info):
@@ -15,29 +12,23 @@ def resolve_is_published(root, info):
 
 
 def resolve_total_comments(root, info):
-    return root.comments.filter(Q(active=True)).count()
+    return root.total_comments
 
 
 def resolve_total_down_votes(root, info):
-    down_vote = getattr(ACTIVITY_TYPES, 'down_vote')
-    return root.user_activities \
-        .filter(Q(activity_type=down_vote) & Q(active=True)) \
-        .count()
+    return root.total_down_votes
 
 
 def resolve_total_ingredients(root, info):
-    return root.ingredients.count()
+    return root.total_ingredients
 
 
 def resolve_total_steps(root, info):
-    return root.steps.count()
+    return root.total_steps
 
 
 def resolve_total_up_votes(root, info):
-    up_vote = getattr(ACTIVITY_TYPES, 'up_vote')
-    return root.user_activities \
-        .filter(Q(activity_type=up_vote) & Q(active=True)) \
-        .count()
+    return root.total_up_votes
 
 
 def resolve_total_time(root, info):
