@@ -1,8 +1,9 @@
 from django.utils.timezone import now
+from django.utils.text import slugify
 
-from graphene import Boolean, Field, Float, Mutation, String
+from graphene import Boolean, Field, Float, List, Mutation, String
 
-from earsie_eats_blog.recipes.models import Recipe
+from earsie_eats_blog.recipes.models import Ingredient, Recipe, Step
 from .types import RecipeNode
 
 
@@ -14,6 +15,8 @@ class CreateRecipe(Mutation):
         prep_time = Float(required=True)
         cook_time = Float(required=True)
         serving_size = Float(required=True)
+        ingredients = List(String)
+        steps = List(String)
         active = Boolean()
 
     recipe = Field(RecipeNode)
@@ -36,6 +39,22 @@ class CreateRecipe(Mutation):
             serving_size=kwargs['serving_size'],
             active=active,
         )
+
+        for label in kwargs.get('steps', []):
+            step, _ = Step.objects.get_or_create(
+                slug=slugify(label),
+                defaults={'label': label}
+            )
+            instance.steps.add(step)
+
+        for label in kwargs.get('ingredients', []):
+            ingredient, _ = Ingredient.objects.get_or_create(
+                slug=slugify(label),
+                defaults={'label': label}
+            )
+            instance.ingredients.add(ingredient)
+
+        instance.save()
 
         return CreateRecipe(recipe=instance)
 
