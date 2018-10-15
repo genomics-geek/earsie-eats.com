@@ -18,6 +18,7 @@ query activityCounts(
     downVotes
     userUpVotes
     userDownVotes
+		totalComments
   }
 }
 `

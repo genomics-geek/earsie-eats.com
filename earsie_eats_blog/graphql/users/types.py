@@ -17,7 +17,7 @@ class UserNode(LoginRequiredMixin, PrimaryKeyMixin, DjangoObjectType):
         interfaces = (Node, )
 
 
-class UserActivityNode(LoginRequiredMixin, PrimaryKeyMixin, DjangoObjectType):
+class UserActivityNode(PrimaryKeyMixin, DjangoObjectType):
 
     activity_type = String(resolver=resolvers.resolve_activity_type)
 
@@ -26,11 +26,15 @@ class UserActivityNode(LoginRequiredMixin, PrimaryKeyMixin, DjangoObjectType):
         interfaces = (Node, )
 
 
-class UserCommentNode(LoginRequiredMixin, PrimaryKeyMixin, DjangoObjectType):
+class UserCommentNode(PrimaryKeyMixin, DjangoObjectType):
 
     class Meta:
         model = Comment
         interfaces = (Node, )
+
+    @classmethod
+    def get_node(cls, info, pk):
+        return Comment.objects.select_related('user').get(pk=pk)
 
 
 class AuthGroupNode(LoginRequiredMixin, PrimaryKeyMixin, DjangoObjectType):
@@ -59,3 +63,4 @@ class ActivityCounts(ObjectType):
     down_votes = Int()
     user_up_votes = Int()
     user_down_votes = Int()
+    total_comments = Int()

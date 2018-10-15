@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
+from django_filters import CharFilter
 from user_activities.choices import ACTIVITY_TYPES
 from user_activities.models import Activity, Comment
 
@@ -26,6 +27,9 @@ class UserActivityFilter(BaseFilterSet):
 
 
 class UserCommentFilter(BaseFilterSet):
+
+    app = CharFilter(field_name='content_type__app_label', lookup_expr='iexact', distinct=True)
+    model = CharFilter(field_name='content_type__model', lookup_expr='iexact', distinct=True)
 
     class Meta:
         model = Comment

@@ -1,9 +1,10 @@
 from django.db.models import Count, Q
 
+from graphene_django.filter import DjangoFilterConnectionField
 from graphene import Node, Field, ID, Int, String
 from graphql_relay import from_global_id
 from user_activities.choices import ACTIVITY_TYPES
-from user_activities.models import Activity
+from user_activities.models import Activity, Comment
 
 from . import filters, types
 from ..fields import ProtectedConnectionField
@@ -19,13 +20,13 @@ class UsersQuery(object):
     )
 
     user_activity = Node.Field(types.UserActivityNode)
-    all_user_activities = ProtectedConnectionField(
+    all_user_activities = DjangoFilterConnectionField(
         types.UserActivityNode,
         filterset_class=filters.UserActivityFilter,
     )
 
     user_comment = Node.Field(types.UserCommentNode)
-    all_user_comments = ProtectedConnectionField(
+    all_user_comments = DjangoFilterConnectionField(
         types.UserCommentNode,
         filterset_class=filters.UserCommentFilter,
     )
@@ -49,6 +50,9 @@ class UsersQuery(object):
     )
 
     current_user = Field(types.UserNode)
+
+    def resolve_all_all_user_comments(self, info, **kwargs):
+        return Comment.objects.select_related('user').all()
 
     def resolve_current_user(self, info):
         if info.context.user.is_authenticated:
@@ -95,5 +99,14 @@ class UsersQuery(object):
                 user_up_votes=user_up_votes,
                 user_down_votes=user_down_votes
             )
+
+        total_comments = Comment.objects.filter(
+            Q(content_type__app_label__iexact=kwargs['app']) &
+            Q(content_type__model__iexact=kwargs['model']) &
+            Q(object_id=kwargs['object_id']) &
+            Q(active=True)
+        ).count()
+
+        result.update({"total_comments": total_comments})
 
         return DictToObject(result)
