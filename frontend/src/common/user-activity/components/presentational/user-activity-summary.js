@@ -1,8 +1,9 @@
 import React from 'react'
 
 import PropTypes from 'prop-types'
-import { Feed, Icon } from 'semantic-ui-react'
+import { Feed, Icon, Modal } from 'semantic-ui-react'
 
+import UserComments from 'common/comments'
 import UserAction from '../smart/user-action'
 
 
@@ -42,6 +43,19 @@ const UserActivitySummary = props => (
 				{props.downVotes}
 			</Feed.Like>
 		</UserAction>
+
+		<Modal
+			trigger={
+				<Feed.Like>
+					<Icon name="comments" />
+					{props.totalComments}
+				</Feed.Like>
+			}
+		>
+			<Modal.Content scrolling>
+				<UserComments app={props.app} model={props.model} objectId={props.objectId} />
+			</Modal.Content>
+		</Modal>
 	</Feed.Meta>
 )
 
@@ -56,6 +70,7 @@ UserActivitySummary.propTypes = {
 	upVoted: PropTypes.bool,
 	downVotes: PropTypes.number,
 	downVoted: PropTypes.bool,
+	totalComments: PropTypes.number,
 }
 
 

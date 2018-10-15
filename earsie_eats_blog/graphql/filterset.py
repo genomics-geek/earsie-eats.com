@@ -30,7 +30,7 @@ class BaseFilterSet(FilterSet):
 
     id__in = GlobalIDInFilter(field_name='pk', distinct=True)
     pk__in = BaseInFilter(field_name='pk', distinct=True)
-    sort_by = CharFilter(field_name='filter_sort_by')
+    sort_by = CharFilter(label='filter_sort_by', method='filter_sort_by')
 
     def filter_sort_by(self, queryset, name, value):
         return queryset.order_by(*value.strip().split(','))

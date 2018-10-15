@@ -26,6 +26,7 @@ const UserActivity = ({ app, model, objectId, userId }) => (
 					model={model}
 					objectId={objectId}
 					userId={userId}
+					totalComments={get(data, 'activityCounts.totalComments', 0)}
 					upVotes={get(data, 'activityCounts.upVotes', 0)}
 					downVotes={get(data, 'activityCounts.downVotes', 0)}
 					upVoted={get(data, 'activityCounts.userUpVotes', 0) !== 0}
