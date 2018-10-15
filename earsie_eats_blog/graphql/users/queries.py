@@ -14,7 +14,7 @@ from ..utils import DictToObject
 class UsersQuery(object):
 
     user = Node.Field(types.UserNode)
-    all_users = ProtectedConnectionField(
+    all_users = DjangoFilterConnectionField(
         types.UserNode,
         filterset_class=filters.UserFilter,
     )

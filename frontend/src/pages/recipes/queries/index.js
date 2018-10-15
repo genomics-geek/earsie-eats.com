@@ -7,15 +7,19 @@ query allRecipes(
   $id_In: String,
   $author: ID,
   $search: String,
+  $authorIn: String,
+  $totalTime: String,
   $ingredients: String
 ) {
   allRecipes(
     id_In: $id_In,
     author: $author,
     search: $search,
+    authorIn: $authorIn,
     ingredients: $ingredients,
+    totalTime: $totalTime,
     active: true,
-    sortBy: "-created"
+    sortBy: "-published"
   ) {
 		edges {
       node {
