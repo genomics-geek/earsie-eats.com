@@ -7,3 +7,4 @@ export { default as SearchDropdown } from './components/smart/search-drop-down'
 
 // Application Dropdowns
 export { default as IngredientsDropdown } from './components/presentational/ingredients-drop-down'
+export { default as UsersDropdown } from './components/presentational/users-drop-down'

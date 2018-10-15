@@ -1,6 +1,6 @@
 from django.db.models import F
 
-from django_filters import NumberFilter
+from django_filters import CharFilter
 
 from earsie_eats_blog.recipes import models
 from ..filters import GlobalIDInFilter, SearchFilter
@@ -9,7 +9,8 @@ from ..filterset import BaseFilterSet
 
 class RecipeFilter(BaseFilterSet):
 
-    total_time = NumberFilter(label='Total Time', method='filter_total_time')
+    author_in = GlobalIDInFilter(field_name='author__id', distinct=True)
+    total_time = CharFilter(label='Total Time', method='filter_total_time')
     search = SearchFilter(search_fields=['title', 'description'])
     ingredients = GlobalIDInFilter(field_name='ingredients__id', distinct=True)
 
@@ -19,7 +20,7 @@ class RecipeFilter(BaseFilterSet):
 
     def filter_total_time(self, qs, field_name, value):
         return qs.annotate(total=F('cook_time') + F('prep_time')) \
-            .filter(total=value)
+            .filter(total__lte=value)
 
 
 class IngredientFilter(BaseFilterSet):

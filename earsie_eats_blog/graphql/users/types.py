@@ -10,7 +10,7 @@ from ..mixins import LoginRequiredMixin, PrimaryKeyMixin
 from . import resolvers
 
 
-class UserNode(LoginRequiredMixin, PrimaryKeyMixin, DjangoObjectType):
+class UserNode(PrimaryKeyMixin, DjangoObjectType):
 
     class Meta:
         model = get_user_model()
