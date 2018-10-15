@@ -10,7 +10,7 @@ import RecipePostDetails from './recipe-post-details'
 
 
 const RecipeView = ({ data, currentUser, isStaff, history }) => (
-	<Grid padded>
+	<Grid padded style={{ opacity: '0.9' }}>
 		<Grid.Row textAlign="center">
 			<Grid.Column width={16}>
 				<Container>

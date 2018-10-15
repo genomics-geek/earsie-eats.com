@@ -12,7 +12,7 @@ import './index.css'
 const Register = () => (
 	<div className="Register">
 		<DocumentTitle title="Earsie Eats | Register" />
-		<Container className="registration-form">
+		<Container className="registration-form" style={{ opacity: '0.90' }}>
 			<Header textAlign="center" className="registration-form" content="Yo, sign up!" />
 			<Header as="h3" textAlign="center" style={{ paddingBottom: '5%' }}>
 				Already have an account? Then please <Link to="/login/">sign in.</Link>

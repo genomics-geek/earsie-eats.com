@@ -21,7 +21,7 @@ const List = ({ history }) => (
 			const recipes = get(data, 'allRecipes.edges', [])
 
 			return (
-				<Grid padded>
+				<Grid padded style={{ opacity: '0.9' }}>
 					<Grid.Row textAlign="center">
 							<Grid.Column width={16}>
 								<Header className="Recipe-list-title" content="Checkout our Recipes!" />

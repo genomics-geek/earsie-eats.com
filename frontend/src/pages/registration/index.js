@@ -7,12 +7,10 @@ import VerifyEmail from './verify-email'
 
 
 const RegisterRoutes = () => (
-	<div>
-		<Switch>
-			<Route exact path="/register/" component={Register} />
-	    <Route path="/register/verify-email/:key" component={VerifyEmail} />
-		</Switch>
-	</div>
+	<Switch>
+		<Route exact path="/register/" component={Register} />
+	   <Route path="/register/verify-email/:key" component={VerifyEmail} />
+	</Switch>
 )
 
 
