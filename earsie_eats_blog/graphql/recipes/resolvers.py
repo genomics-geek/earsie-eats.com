@@ -4,7 +4,8 @@ from django.conf import settings
 
 
 def resolve_image_url(root, info):
-    return os.path.join(settings.MEDIA_URL, str(root.image))
+    if root.image:
+        return os.path.join(settings.MEDIA_URL, str(root.image))
 
 
 def resolve_is_published(root, info):

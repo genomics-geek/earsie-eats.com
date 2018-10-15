@@ -30,8 +30,12 @@ urlpatterns = [
     re_path(r'^register/', TemplateView.as_view(template_name="index.html"), name="register"),
     path("register/verify-email/<str:key>", TemplateView.as_view(template_name="index.html"), name="verify_email"),
 
+    # Data endpoints
     path("api/", include(router.urls)),
     path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
+
+    # Local APP urls
+    path("recipes/", include('earsie_eats_blog.recipes.urls')),
 
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
