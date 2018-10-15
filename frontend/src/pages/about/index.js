@@ -3,12 +3,22 @@ import React from 'react'
 import DocumentTitle from 'react-document-title'
 import { Container, Header } from 'semantic-ui-react'
 
+import './index.css'
+
 
 const About = () => (
-	<div>
+	<div className="About">
 		<DocumentTitle title="Earsie Eats | About" />
-		<Container>
-			<Header as='h2' textAlign="center" content="Earsie Eats About Me Place holder" />
+		<Container textAlign="center">
+			<Header
+				content="Hold tight! Coming soon..."
+				color="blue"
+				style={{
+					paddingTop: '10%',
+					fontFamily: 'Indie Flower, cursive',
+					fontSize: "100px"
+				}}
+			/>
 		</Container>
 	</div>
 )

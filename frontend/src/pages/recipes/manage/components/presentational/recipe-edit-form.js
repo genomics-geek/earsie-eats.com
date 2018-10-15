@@ -99,8 +99,8 @@ class EditRecipeForm extends Component {
 		} = this.state
 
 		return (
-			<div className="Create-Recipe">
-				<Grid padded>
+			<div className="Manage-Recipe">
+				<Grid padded style={{ opacity: '0.90' }}>
 					<Grid.Row style={{ paddingBottom: '0px' }}>
 						<Grid.Column width={16}>
 							<CreateOrEditRecipe
@@ -118,7 +118,8 @@ class EditRecipeForm extends Component {
 							>
 								<Button
 									icon="save"
-									color="blue"
+									color="black"
+									inverted
 									size="large"
 									content="Save Recipe!"
 									disabled={this.isDisabled()}
@@ -175,9 +176,9 @@ EditRecipeForm.propTypes = {
 	defaultTitle: PropTypes.string,
 	defaultImage: PropTypes.string,
 	defaultDescription: PropTypes.string,
-	defaultCookTime: PropTypes.number,
-	defaultPrepTime: PropTypes.number,
-	defaultServingSize: PropTypes.number,
+	defaultCookTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	defaultPrepTime: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	defaultServingSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	defaultActive: PropTypes.bool,
 	defaultIngredients: PropTypes.arrayOf(PropTypes.string),
 	defaultSteps: PropTypes.arrayOf(PropTypes.string),
@@ -185,9 +186,16 @@ EditRecipeForm.propTypes = {
 
 
 EditRecipeForm.defaultProps = {
+	recipeId: '',
+	defaultTitle: '',
+	defaultImage: '',
+	defaultDescription: '',
+	defaultCookTime: '',
+	defaultPrepTime: '',
+	defaultServingSize: '',
 	defaultActive: true,
-	defaultSteps: [],
 	defaultIngredients: [],
+	defaultSteps: [],
 }
 
 

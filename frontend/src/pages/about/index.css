@@ -1,0 +1,8 @@
+.About {
+  background: url(https://s3.amazonaws.com/earsie-eats.com/coming-soon-background.jpg) no-repeat center center;
+  background-attachment: fixed;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}

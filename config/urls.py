@@ -24,10 +24,11 @@ router = DefaultRouter(trailing_slash=False)
 
 urlpatterns = [
     # React UI routes
-    re_path(r'^$', TemplateView.as_view(template_name="index.html")),
+    path("", TemplateView.as_view(template_name="index.html")),
     re_path(r'^app/(?P<route>.*)$', login_required(TemplateView.as_view(template_name="index.html")), name='app'),
-    re_path(r'^login/', TemplateView.as_view(template_name="index.html"), name="login"),
-    re_path(r'^register/', TemplateView.as_view(template_name="index.html"), name="register"),
+    path("login/", TemplateView.as_view(template_name="index.html"), name="login"),
+    path("register/", TemplateView.as_view(template_name="index.html"), name="register"),
+    re_path(r'^management/(?P<route>.*)$', TemplateView.as_view(template_name="index.html"), name="management"),
     path("register/verify-email/<str:key>", TemplateView.as_view(template_name="index.html"), name="verify_email"),
 
     # Data endpoints
@@ -41,14 +42,14 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
 
     # Django REST Auth
-    re_path(r'^auth/', include('django.contrib.auth.urls')),
-    re_path(r'^rest-auth/', include('rest_auth.urls')),
-    re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    re_path(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
-    re_path(r'^rest-auth/google/$', GoogleLogin.as_view(), name='google_login'),
-    re_path(r'^rest-auth/github/$', GitHubLogin.as_view(), name='github_login'),
-    re_path(r'^rest-auth/instagram/$', InstagramLogin.as_view(), name='instagram_login'),
-    re_path(r'^rest-auth/twitter/$', TwitterLogin.as_view(), name='twitter_login'),
+    path("auth/", include('django.contrib.auth.urls')),
+    path("rest-auth/", include('rest_auth.urls')),
+    path("rest-auth/registration/", include('rest_auth.registration.urls')),
+    path("rest-auth/facebook/", FacebookLogin.as_view(), name='fb_login'),
+    path("rest-auth/google/", GoogleLogin.as_view(), name='google_login'),
+    path("rest-auth/github/", GitHubLogin.as_view(), name='github_login'),
+    path("rest-auth/instagram/", InstagramLogin.as_view(), name='instagram_login'),
+    path("rest-auth/twitter/", TwitterLogin.as_view(), name='twitter_login'),
 
     # Django all-auth URLs
     path("home/", TemplateView.as_view(template_name="pages/home.html"), name="home"),
