@@ -9,6 +9,8 @@ mutation createRecipe(
   $cookTime: Float!,
   $prepTime: Float!
   $servingSize: Float!,
+	$steps: [String],
+	$ingredients: [String],
   $active: Boolean,
 ) {
   createRecipe(
@@ -17,6 +19,8 @@ mutation createRecipe(
     cookTime: $cookTime,
     prepTime: $prepTime,
     servingSize: $servingSize,
+		steps: $steps,
+		ingredients: $ingredients,
     active: $active
   ) {
     recipe {...RecipeParts}
