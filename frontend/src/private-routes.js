@@ -2,15 +2,13 @@ import React from 'react'
 
 import { Route, Switch } from 'react-router-dom'
 
-import CreateRecipe from 'pages/recipes/create'
-
-const Edit = () => <p>Edit Recipes</p>
+import ManageRecipe from 'pages/recipes/manage'
 
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/management/recipes/create/" component={CreateRecipe} />
-    <Route exact path="/management/recipes/edit/:recipeId" component={Edit} />
+    <Route exact path="/management/recipes/create/" component={ManageRecipe} />
+    <Route exact path="/management/recipes/edit/:recipeId" component={ManageRecipe} />
   </Switch>
 )
 

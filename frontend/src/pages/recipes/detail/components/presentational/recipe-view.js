@@ -2,13 +2,14 @@ import React from 'react'
 
 import { get } from 'lodash'
 import PropTypes from 'prop-types'
-import { Container, Grid, Header, Segment } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
+import { Container, Grid, Header, Icon, Segment } from 'semantic-ui-react'
 
 import RecipeList from './recipe-list'
 import RecipePostDetails from './recipe-post-details'
 
 
-const RecipeView = ({ data, currentUser }) => (
+const RecipeView = ({ data, currentUser, isStaff, history }) => (
 	<Grid padded>
 		<Grid.Row textAlign="center">
 			<Grid.Column width={16}>
@@ -33,10 +34,21 @@ const RecipeView = ({ data, currentUser }) => (
 						textAlign="center"
 						style={{ fontFamily: 'Indie Flower', fontSize: '25px' }}
 					/>
-						<div
-							className="Recipe-details-description"
-							dangerouslySetInnerHTML={{__html: get(data, 'description')}}
+					{isStaff && (
+						<Icon
+							name="edit"
+							size="large"
+							color="blue"
+							style={{ cursor: 'pointer' }}
+							onClick={() => history.push(`/management/recipes/edit/${get(data, 'id')}/`)}
 						/>
+					)}
+					<br />
+					<br />
+					<div
+						className="Recipe-details-description"
+						dangerouslySetInnerHTML={{__html: get(data, 'description')}}
+					/>
 				</Segment>
 			</Grid.Column>
 		</Grid.Row>
@@ -109,7 +121,14 @@ RecipeView.propTypes = {
 		}),
 	}),
 	currentUser: PropTypes.string,
+	isStaff: PropTypes.bool,
+	history: PropTypes.object.isRequired,
 }
 
 
-export default RecipeView
+RecipeView.defaultProps = {
+	isStaff: false,
+}
+
+
+export default withRouter(RecipeView)

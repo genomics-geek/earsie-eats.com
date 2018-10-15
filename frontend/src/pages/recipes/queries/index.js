@@ -16,6 +16,12 @@ query allRecipes($id_In: String, $author: ID, $search: String, $ingredients: Str
       }
 	  }
   }
+  currentUser {
+		id
+    email
+		username
+    isStaff
+	}
 }
 ${Recipe.fragments.default}
 `
@@ -46,6 +52,7 @@ query recipe($id: ID!) {
 		id
     email
 		username
+    isStaff
 	}
 }
 ${Recipe.fragments.default}

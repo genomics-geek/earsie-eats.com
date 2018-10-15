@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { map } from 'lodash'
 import PropTypes from 'prop-types'
-import { Button, Divider, Header, Input, List, Segment } from 'semantic-ui-react'
+import { Button, Divider, Header, Icon, Input, List, Segment } from 'semantic-ui-react'
 
 
 class RecipeAddSegment extends Component {
@@ -19,7 +19,7 @@ class RecipeAddSegment extends Component {
 	}
 
 	render() {
-		const { header, icon, items } = this.props
+		const { header, icon, items, onRemoveItem } = this.props
 		const { label } = this.state
 
 		return (
@@ -46,10 +46,16 @@ class RecipeAddSegment extends Component {
 						inverted
 						content="Add"
 						onClick={this.onAddItem}
+						disabled={!label}
 					/>
 			  </Input>
 				<List ordered size="huge">
-					{map(items, item => <List.Item key={item} content={item} />)}
+					{map(items, item => (
+						<List.Item key={item}>
+							{item}&nbsp;&nbsp;
+							<Icon name="delete" color="red" onClick={() => onRemoveItem(item)} />
+						</List.Item>
+					))}
 				</List>
 			</Segment>
 		)
@@ -59,6 +65,7 @@ class RecipeAddSegment extends Component {
 
 RecipeAddSegment.propTypes = {
 	onAddItem: PropTypes.func.isRequired,
+	onRemoveItem: PropTypes.func.isRequired,
 	header: PropTypes.string.isRequired,
 	icon: PropTypes.string,
 	items: PropTypes.arrayOf(PropTypes.string)

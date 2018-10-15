@@ -1,8 +1,10 @@
 import React from 'react'
 
 import { get } from 'lodash'
+import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
-import { Grid, Header } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
+import { Button, Grid, Header } from 'semantic-ui-react'
 
 import Alert from 'common/alert'
 
@@ -11,7 +13,7 @@ import RecipeCards from './components/presentational/recipe-cards'
 import RecipeFilter from './components/presentational/recipes-filter'
 
 
-const List = () => (
+const List = ({ history }) => (
 	<Query query={RECIPE_LIST_QUERY}>
 		{({ loading, error, data, refetch }) => {
 			if (error) return <Alert type="error" message={`Recipe: ${error.message}`} />
@@ -23,6 +25,15 @@ const List = () => (
 					<Grid.Row textAlign="center">
 							<Grid.Column width={16}>
 								<Header className="Recipe-list-title" content="Checkout our Recipes!" />
+								{get(data, 'currentUser.isStaff') && (
+									<Button
+										icon="add circle"
+										content="Add a Recipe"
+										color="black"
+										size="large"
+										onClick={() => history.push('/management/recipes/create')}
+									/>
+								)}
 							</Grid.Column>
 					</Grid.Row>
 
@@ -42,4 +53,9 @@ const List = () => (
 )
 
 
-export default List
+List.propTypes = {
+	history: PropTypes.object.isRequired,
+}
+
+
+export default withRouter(List)

@@ -15,7 +15,7 @@ export const Home = ({ history }) => (
       <Header size="huge" content="Earsie Eats Blog" />
       <Header className="detail" size="large" content="Food. Food. Food." />
       <Button
-        content="Check out the blog!"
+        content="Check out Our Recipes!"
         color="red"
         size="massive"
         onClick={() => history.push('/app/recipes/')}
