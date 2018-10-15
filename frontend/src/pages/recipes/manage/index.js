@@ -50,9 +50,9 @@ const ManageRecipe = ({ match }) => {
 ManageRecipe.propTypes = {
 	match: PropTypes.shape({
 		params: PropTypes.shape({
-			recipeId: PropTypes.string.isRequired,
-		}).isRequired
-	}).isRequired,
+			recipeId: PropTypes.string,
+		})
+	}),
 }
 
 

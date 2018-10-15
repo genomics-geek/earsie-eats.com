@@ -11,7 +11,10 @@ const CreateOrEditRecipe = ({ alert, children, onCompleted, variables }) => (
 	<Mutation
 		mutation={CREATE_RECIPE_MUTATION}
 		variables={variables}
-		onCompleted={data => alert.success('Recipe saved!')}
+		onCompleted={data => {
+			alert.success('Recipe saved!')
+			if (onCompleted) onCompleted(data)
+		}}
 		onError={error => alert.error('Recipe could not be saved! ' + error.message)}
 	>
 		{create => React.cloneElement(children, {onClick: create})}

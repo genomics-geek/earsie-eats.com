@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
-import { concat, without } from 'lodash'
+import { concat, get, without } from 'lodash'
 import PropTypes from 'prop-types'
+import { withAlert } from 'react-alert'
 import { Button, Grid } from 'semantic-ui-react'
 
+import { api } from 'common/api'
 import RecipeDetailsForm from './recipe-details-form'
 import RecipeAddSegment from './recipe-add-segment'
 import CreateOrEditRecipe from '../smart/create-or-edit-recipe'
@@ -55,6 +57,23 @@ class EditRecipeForm extends Component {
 
 	onTextEdit = value => this.setState({ description: value })
 
+	onCompleted = data => {
+		const { alert } = this.props
+
+		const form = new FormData()
+		form.append('recipe', get(data, 'createRecipe.recipe.pk'))
+	  form.append('image', get(this.fileUpload, 'files[0]'))
+
+    api.put("/recipes/upload-image/", form, {
+      headers: {
+          'Content-Type': 'multipart/form-data',
+          'credentials': 'same-origin'
+        }
+    })
+    .then(response => alert.success('Image Added!'))
+    .catch(error => alert.error(error.message))
+	}
+
 	isDisabled = () => {
 		const { title, description, cookTime, prepTime, servingSize } = this.state
 
@@ -95,6 +114,7 @@ class EditRecipeForm extends Component {
 									ingredients,
 									active,
 								}}
+								onCompleted={this.onCompleted}
 							>
 								<Button
 									icon="save"
@@ -171,4 +191,4 @@ EditRecipeForm.defaultProps = {
 }
 
 
-export default EditRecipeForm
+export default withAlert(EditRecipeForm)
