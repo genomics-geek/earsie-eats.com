@@ -28,6 +28,12 @@ class RecipesQuery(object):
         filterset_class=filters.StepFilter,
     )
 
+    recipe_step_relationship = Node.Field(types.RecipeStepRelationshipNode)
+    all_recipe_step_relationships = DjangoFilterConnectionField(
+        types.RecipeStepRelationshipNode,
+        filterset_class=filters.RecipeStepRelationshipFilter,
+    )
+
     def resolve_all_recipes(self, info, **kwargs):
         down_vote = getattr(ACTIVITY_TYPES, 'down_vote')
         up_vote = getattr(ACTIVITY_TYPES, 'up_vote')

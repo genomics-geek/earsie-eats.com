@@ -18,10 +18,15 @@ class CommentInline(GenericTabularInline):
     raw_id_fields = ('user', 'content_type', 'tags')
 
 
+class RecipeStepRelationshipInline(admin.TabularInline):
+    model = models.RecipeStepRelationship
+    raw_id_fields = ('recipe', 'step')
+
+
 class RecipeAdmin(VersionAdmin):
     model = models.Recipe
-    inlines = [ActivityInline, CommentInline]
-    list_display = ('author', 'title', 'total_time', 'is_published', 'published', 'created', 'modified')
+    inlines = [ActivityInline, CommentInline, RecipeStepRelationshipInline]
+    list_display = ('author', 'title', 'total_time', 'is_published', 'published', 'active', 'created', 'modified')
     prepopulated_fields = {'slug': ('title', )}
     raw_id_fields = ('author', 'ingredients', 'steps')
     search_fields = ('title', 'description')
@@ -31,7 +36,7 @@ class RecipeAdmin(VersionAdmin):
 
 class IngredientAdmin(admin.ModelAdmin):
     model = models.Ingredient
-    list_display = ('label', 'created', 'modified')
+    list_display = ('label', 'active', 'created', 'modified')
     prepopulated_fields = {'slug': ('label', )}
     search_fields = ('label', )
     list_filter = ('active', )
@@ -40,13 +45,22 @@ class IngredientAdmin(admin.ModelAdmin):
 
 class StepAdmin(admin.ModelAdmin):
     model = models.Step
-    list_display = ('label', 'created', 'modified')
+    inlines = [RecipeStepRelationshipInline]
+    list_display = ('label', 'active', 'created', 'modified')
     prepopulated_fields = {'slug': ('label', )}
     search_fields = ('label', )
     list_filter = ('active', )
     save_as = True
 
 
+class RecipeStepRelationshipAdmin(admin.ModelAdmin):
+    model = models.RecipeStepRelationship
+    list_display = ('recipe', 'step', 'order', 'created', 'modified')
+    search_fields = ('recipe_title', 'step__label', 'ingredient__label')
+    save_as = True
+
+
 admin.site.register(models.Recipe, RecipeAdmin)
 admin.site.register(models.Ingredient, IngredientAdmin)
 admin.site.register(models.Step, StepAdmin)
+admin.site.register(models.RecipeStepRelationship, RecipeStepRelationshipAdmin)

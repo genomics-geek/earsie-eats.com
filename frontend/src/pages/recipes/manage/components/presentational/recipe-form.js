@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { concat, get, without } from 'lodash'
+import { concat, get, map, without } from 'lodash'
 import PropTypes from 'prop-types'
 import { withAlert } from 'react-alert'
 import { withRouter } from 'react-router-dom'
@@ -47,11 +47,35 @@ class RecipeForm extends Component {
 
 	onAddIngredient = label => this.setState({ ingredients: concat(this.state.ingredients, [label]) })
 
+	onEditIngredient = (label, index, newLabel) => {
+		const { ingredients } = this.state
+		const newIngredients = []
+
+		map(ingredients, (item, number) => {
+			if (number === index) newIngredients.push(newLabel)
+			else newIngredients.push(item)
+		})
+
+		this.setState({ ingredients: newIngredients })
+	}
+
 	onRemoveIngredient = label => this.setState({ ingredients: without(this.state.ingredients, label) })
 
 	onAddStep = label => this.setState({ steps: concat(this.state.steps, [label]) })
 
 	onRemoveStep = label => this.setState({ steps: without(this.state.steps, label) })
+
+	onEditStep = (label, index, newLabel) => {
+		const { steps } = this.state
+		const newSteps = []
+
+		map(steps, (item, number) => {
+			if (number === index) newSteps.push(newLabel)
+			else newSteps.push(item)
+		})
+
+		this.setState({ steps: newSteps })
+	}
 
 	onChange = (e, { name, value }) => this.setState({ [name]: value })
 
@@ -179,6 +203,7 @@ class RecipeForm extends Component {
 								header="Ingredients"
 								items={ingredients}
 								onAddItem={this.onAddIngredient}
+								onEditItem={this.onEditIngredient}
 								onRemoveItem={label => this.onRemoveIngredient(label)}
 							/>
 						</Grid.Column>
@@ -189,6 +214,7 @@ class RecipeForm extends Component {
 								header="Steps"
 								items={steps}
 								onAddItem={this.onAddStep}
+								onEditItem={this.onEditStep}
 								onRemoveItem={label => this.onRemoveStep(label)}
 							/>
 						</Grid.Column>

@@ -6,7 +6,7 @@ import { List } from 'semantic-ui-react'
 
 
 const RecipeList = ({ items }) => (
-	<List ordered style={{ fontSize: '18px' }}>
+	<List style={{ fontSize: '18px' }}>
 		{map(items, item => (
 			<List.Item
 				key={get(item, 'node.id')}
