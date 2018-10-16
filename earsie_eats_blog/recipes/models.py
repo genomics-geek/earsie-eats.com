@@ -30,7 +30,7 @@ class Recipe(TimeStampedModel):
     active = models.BooleanField(default=False)
 
     ingredients = models.ManyToManyField('recipes.Ingredient', blank=True)
-    steps = models.ManyToManyField('recipes.Step', blank=True)
+    steps = models.ManyToManyField('recipes.Step', through='RecipeStepRelationship', blank=True)
 
     comments = GenericRelation('user_activities.Comment')
     user_activities = GenericRelation('user_activities.Activity')
@@ -56,10 +56,31 @@ class Recipe(TimeStampedModel):
         super(Recipe, self).save(**kwargs)
 
 
+class RecipeStepRelationship(TimeStampedModel):
+    recipe = models.ForeignKey(
+        'recipes.Recipe',
+        related_name='recipe_step_relationships',
+        on_delete=models.CASCADE,
+    )
+    step = models.ForeignKey(
+        'recipes.Step',
+        related_name='recipe_step_relationships',
+        on_delete=models.CASCADE
+    )
+    order = models.PositiveIntegerField()
+
+    class Meta:
+        verbose_name = _('Recipe Step Relationship')
+        verbose_name_plural = _('Recipe Step Relationships')
+
+    def __str__(self):
+        return f'Recipe: {self.recipe.pk} - Step: {self.step.pk}: {self.order}'
+
+
 class Ingredient(TimeStampedModel):
     label = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = _('Ingredient')
@@ -76,7 +97,7 @@ class Ingredient(TimeStampedModel):
 class Step(TimeStampedModel):
     label = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = _('Step')

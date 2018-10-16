@@ -11,7 +11,7 @@ class RecipeFilter(BaseFilterSet):
 
     author_in = GlobalIDInFilter(field_name='author__id', distinct=True)
     total_time = CharFilter(label='Total Time', method='filter_total_time')
-    search = SearchFilter(search_fields=['title', 'description'])
+    search = SearchFilter(search_fields=['title', 'description', 'steps__label', 'ingredients__label'])
     ingredients = GlobalIDInFilter(field_name='ingredients__id', distinct=True)
 
     class Meta:
@@ -34,4 +34,11 @@ class StepFilter(BaseFilterSet):
 
     class Meta:
         model = models.Step
+        fields = '__all__'
+
+
+class RecipeStepRelationshipFilter(BaseFilterSet):
+
+    class Meta:
+        model = models.RecipeStepRelationship
         fields = '__all__'

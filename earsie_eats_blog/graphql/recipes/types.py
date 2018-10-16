@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from graphene import Boolean, Float, Int, Node, String
 from graphene_django import DjangoObjectType
 
@@ -27,6 +29,26 @@ class RecipeNode(PrimaryKeyMixin, DjangoObjectType):
             .select_related('author') \
             .prefetch_related('ingredients') \
             .prefetch_related('steps') \
+            .get(pk=pk)
+
+    def resolve_steps(self, info):
+        return models.Step.objects \
+            .filter(Q(recipe_step_relationships__recipe__pk=self.pk)) \
+            .order_by('recipe_step_relationships__order') \
+            .all()
+
+
+class RecipeStepRelationshipNode(PrimaryKeyMixin, DjangoObjectType):
+
+    class Meta:
+        model = models.RecipeStepRelationship
+        interfaces = (Node, )
+
+    @classmethod
+    def get_node(cls, info, pk):
+        return models.RecipeStepRelationship.objects \
+            .select_related('recipe') \
+            .prefetch_related('step') \
             .get(pk=pk)
 
 
