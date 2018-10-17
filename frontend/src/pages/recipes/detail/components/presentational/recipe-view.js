@@ -3,7 +3,7 @@ import React from 'react'
 import { get } from 'lodash'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { Container, Grid, Header, Icon, Segment } from 'semantic-ui-react'
+import { Grid, Header, Icon, Segment } from 'semantic-ui-react'
 
 import RecipeList from './recipe-list'
 import RecipePostDetails from './recipe-post-details'
@@ -13,26 +13,23 @@ const RecipeView = ({ data, currentUser, isStaff, history }) => (
 	<Grid padded style={{ opacity: '0.9' }}>
 		<Grid.Row textAlign="center">
 			<Grid.Column width={16}>
-				<Container>
-					<Header className="Recipe-details-title" content={get(data, 'title')}/>
-				</Container>
-
-				<RecipePostDetails
-					pk={get(data, 'pk')}
-					author={get(data, 'author')}
-					currentUser={currentUser}
-					published={get(data, 'published')}
-				/>
+				<Header className="Recipe-details-title" content={get(data, 'title')}/>
 			</Grid.Column>
 		</Grid.Row>
 
 		<Grid.Row>
 			<Grid.Column width={16}>
-				<Segment textAlign="left" raised>
+				<Segment raised>
+					<RecipePostDetails
+						pk={get(data, 'pk')}
+						author={get(data, 'author')}
+						currentUser={currentUser}
+						published={get(data, 'published')}
+					/>
 					<Header
 						content="Description"
 						textAlign="center"
-						style={{ fontFamily: 'Indie Flower', fontSize: '25px' }}
+						style={{ fontFamily: 'Indie Flower', fontSize: '25px', marginTop: '2%'}}
 					/>
 					{isStaff && (
 						<Icon
@@ -44,7 +41,6 @@ const RecipeView = ({ data, currentUser, isStaff, history }) => (
 						/>
 					)}
 					<br />
-					<br />
 					<div
 						className="Recipe-details-description"
 						dangerouslySetInnerHTML={{__html: get(data, 'description')}}
@@ -54,23 +50,23 @@ const RecipeView = ({ data, currentUser, isStaff, history }) => (
 		</Grid.Row>
 
 		<Grid.Row>
-			<Grid.Column width={8}>
-				<Segment textAlign="left" raised>
+			<Grid.Column mobile={16} tablet={16} computer={8} style={{ paddingBottom: '3%' }}>
+				<Segment raised>
 					<Header
 						className="Recipe-details-list-header"
 						content="Ingredients"
 						icon="food"
+						textAlign="center"
 						style={{ fontFamily: 'Indie Flower', fontSize: '25px' }}
 					/>
 					<RecipeList items={get(data, 'ingredients.edges', [])} />
 				</Segment>
 			</Grid.Column>
 
-			<Grid.Column width={8}>
-				<Segment textAlign="left" raised>
+			<Grid.Column mobile={16} tablet={16} computer={8}>
+				<Segment raised>
 					<Header
 						className="Recipe-details-list-header"
-						textAlign="center"
 						content="Steps"
 						icon="list ol"
 						style={{ fontFamily: 'Indie Flower', fontSize: '25px' }}

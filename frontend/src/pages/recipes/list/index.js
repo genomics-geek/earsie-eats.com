@@ -38,11 +38,11 @@ const List = ({ history }) => (
 					</Grid.Row>
 
 					<Grid.Row>
-						<Grid.Column mobile={16} tablet={8} computer={4}>
+						<Grid.Column mobile={16} tablet={16} computer={6} largeScreen={4} style={{ paddingBottom: '3%' }}>
 							<RecipeFilter loading={loading} refetch={refetch} numberOfRecipes={recipes.length} />
 						</Grid.Column>
 
-						<Grid.Column mobile={16} tablet={8} computer={12}>
+						<Grid.Column mobile={16} tablet={16} computer={10} largeScreen={12} textAlign="center">
 							{!loading ? <RecipeCards loading={loading} data={recipes}/> : null}
 						</Grid.Column>
 					</Grid.Row>

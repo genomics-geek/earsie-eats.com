@@ -8,7 +8,7 @@ import { Card, Icon, Image, List } from 'semantic-ui-react'
 
 
 const RecipeCards = ({ data, history }) => (
-	<Card.Group>
+	<Card.Group className="centered">
 		{map(data, item => (
 			<Card
 				raised

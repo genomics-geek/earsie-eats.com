@@ -3,29 +3,31 @@ import React from 'react'
 import { get } from 'lodash'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import { Feed } from 'semantic-ui-react'
+import { Feed, Grid } from 'semantic-ui-react'
 
 import UserActivity from 'common/user-activity'
 
 
 const RecipePostDetails = ({ pk, author, published, currentUser }) => (
-	<Feed className="Recipe-details-feed" size="large">
-		<Feed.Event>
-			<Feed.Content>
-				<Feed.Summary>
-					<Feed.User>{get(author, 'username')}</Feed.User> published this recipe &nbsp;
-					<Feed.User>{moment(published).fromNow()}</Feed.User>
-					&nbsp;&nbsp;
-					<UserActivity
-						app="recipes"
-						model="recipe"
-						objectId={pk}
-						userId={currentUser}
-					/>
-				</Feed.Summary>
-			</Feed.Content>
-		</Feed.Event>
-	</Feed>
+	<Grid centered padded>
+		<Feed className="Recipe-details-feed">
+			<Feed.Event>
+				<Feed.Content>
+					<Feed.Summary>
+						<Feed.User>{get(author, 'username')}</Feed.User> published this recipe &nbsp;
+						<Feed.User>{moment(published).fromNow()}</Feed.User>
+						&nbsp;&nbsp;
+						<UserActivity
+							app="recipes"
+							model="recipe"
+							objectId={pk}
+							userId={currentUser}
+						/>
+					</Feed.Summary>
+				</Feed.Content>
+			</Feed.Event>
+		</Feed>
+	</Grid>
 )
 
 
