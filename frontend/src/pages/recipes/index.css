@@ -21,13 +21,8 @@
   font-size: 50px;
 }
 
-.ui.feed.Recipe-details-feed {
-  width: 50%;
-  margin: 0 auto;
-}
-
 .ui.feed.Recipe-details-feed>.event>.content .summary {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .Recipe-details-description p,
@@ -42,6 +37,7 @@
 
 .Recipe-details-description {
   font-size: 20px;
+  text-align: center;
 }
 
 .ui.header.Recipe-details-list-header>.icon {
@@ -49,6 +45,7 @@
 }
 
 /*  Create */
+
 .Recipe-editor .ql-editor {
   min-height: 25em;
 }
